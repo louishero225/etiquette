@@ -1,0 +1,180 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-white px-4 py-2 rounded-lg hover:bg-secondary-dark transition-colors;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-200;
+  }
+
+  .input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+
+  /* Dimensions fixes pour les étiquettes */
+  .price-label {
+    width: 90mm !important;
+    height: 40mm !important;
+    padding: 3mm !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* Styles d'impression */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Masquer les éléments inutiles */
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Forcer le mode paysage */
+  .print\:landscape {
+    width: 297mm;
+    height: 210mm;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Forcer 3 colonnes avec espace */
+  .print\:grid-cols-3 {
+    display: grid !important;
+    grid-template-columns: repeat(3, 90mm) !important;
+    gap: 10mm !important;
+    margin: 0 !important;
+    padding: 5mm !important;
+    justify-content: center !important;
+  }
+
+  /* Style des étiquettes */
+  .price-label {
+    width: 90mm !important;
+    height: 40mm !important;
+    padding: 2mm 2mm 1mm 2mm !important;  
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+
+  /* Wrapper des étiquettes */
+  .label-wrapper {
+    width: 90mm !important;
+    height: 40mm !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Ajustements spécifiques pour le contenu des étiquettes */
+  .price-label > div {
+    width: 100% !important;
+  }
+
+  .price-label .text-base {
+    font-size: 12pt !important;
+    line-height: 1.1 !important;
+  }
+
+  .price-label .text-xl {
+    font-size: 16pt !important;
+    line-height: 1.1 !important;
+  }
+
+  .price-label .text-2xl {
+    font-size: 18pt !important;
+    line-height: 1.1 !important;
+  }
+
+  .price-label .text-sm {
+    font-size: 10pt !important;
+    line-height: 1.1 !important;
+  }
+
+  .price-label .text-xs {
+    font-size: 9pt !important;
+    line-height: 1.1 !important;
+  }
+
+  /* Forcer l'affichage des couleurs */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Éviter les sauts de page */
+  .print\:break-inside-avoid {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Réinitialiser toutes les marges possibles */
+  .print\:m-0 {
+    margin: 0 !important;
+  }
+  
+  .container {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+}
+
+@media print {
+  @page {
+    margin: 0;
+    size: auto;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Cacher les éléments non nécessaires à l'impression */
+  nav, header, footer, .print\:hidden {
+    display: none !important;
+  }
+
+  /* Forcer les dimensions exactes à l'impression */
+  .price-label {
+    width: 90mm !important;
+    height: 40mm !important;
+    margin: 0 !important;
+    padding: 3mm !important;
+    page-break-inside: avoid !important;
+  }
+}

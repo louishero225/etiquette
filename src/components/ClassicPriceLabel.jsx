@@ -37,11 +37,11 @@ export default function ClassicPriceLabel({ product }) {
       </div>
 
       {/* Ligne du bas avec alcool et colisage */}
-      <div className="flex justify-between items-end text-base font-bold">
-        <div className="bg-black rounded-lg text-white bg-opacity-100 px-2 my-0">
+      <div className="flex justify-between items-end text-base font-bold mt-4">
+        <div className=" text-black px-2">
           {product.alcoholContent !== '0.0%' ? product.alcoholContent : ''}
         </div>
-        <div className="bg-black rounded-lg text-white bg-opacity-100 px-2 my-0">
+        <div className="text-black px-2">
           {product.packaging} x {product.volume}
         </div>
       </div>

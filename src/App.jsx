@@ -1,32 +1,77 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Layout from './components/Layout';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
+import { AnimatePresence } from 'framer-motion';
+import PrivateRoute from './components/PrivateRoute';
+import Navbar from './components/Navbar';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import ResetPassword from './pages/ResetPassword';
 import Home from './pages/Home';
-import Catalog from './pages/Catalog';
 import Labels from './pages/Labels';
 import PrintLabels from './pages/PrintLabels';
-import Products from './pages/Products';
-import TestSupabase from './pages/TestSupabase';
+import Proforma from './pages/Proforma';
+import Profile from './pages/Profile';
+import './App.css';
+import './styles/auth.css';
 
-export default function App() {
-  
+function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          {/* Redirection de la page d'accueil vers les étiquettes */}
-          <Route index element={<Navigate to="/etiquettes" replace />} />
-          
-          {/* Page principale des étiquettes */}
-          <Route path="etiquettes" element={<Labels />} />
-          
-          {/* Page d'impression des étiquettes */}
-          <Route path="print" element={<PrintLabels />} />
-        </Route>
-      </Routes>
+      <ThemeProvider>
+        <AuthProvider>
+          <AppContent />
+        </AuthProvider>
+      </ThemeProvider>
     </Router>
   );
 }
+
+function AppContent() {
+  const location = useLocation();
+
+  return (
+    <div className="min-h-screen w-full bg-gray-50 dark:bg-gray-900">
+      <Navbar />
+      <div className="w-full">
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            {/* Routes publiques */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            
+            {/* Routes protégées */}
+            <Route path="/" element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            } />
+            <Route path="/etiquettes" element={
+              <PrivateRoute>
+                <Labels />
+              </PrivateRoute>
+            } />
+            <Route path="/print" element={
+              <PrivateRoute>
+                <PrintLabels />
+              </PrivateRoute>
+            } />
+            <Route path="/proforma" element={
+              <PrivateRoute>
+                <Proforma />
+              </PrivateRoute>
+            } />
+            <Route path="/profile" element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            } />
+          </Routes>
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
+
+export default App;

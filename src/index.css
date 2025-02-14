@@ -34,10 +34,10 @@
 
   /* Dimensions fixes pour les étiquettes */
   .price-label {
-    width: 90mm !important;
-    height: 40mm !important;
-    padding: 3mm !important;
-    box-sizing: border-box !important;
+    width: 90mm;
+    height: 45mm;
+    padding: 3mm;
+    box-sizing: border-box;
   }
 }
 
@@ -45,7 +45,7 @@
 @media print {
   @page {
     size: A4 landscape;
-    margin: 0;
+    margin: 0mm;
   }
 
   body {
@@ -53,11 +53,21 @@
     padding: 0 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+    background: none !important;
   }
 
-  /* Masquer les éléments inutiles */
-  .print\:hidden {
+  /* Masquer la navbar et autres éléments non nécessaires */
+  .print\:hidden,
+  nav,
+  header,
+  .fixed {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    pointer-events: none !important;
   }
 
   /* Forcer le mode paysage */
@@ -66,14 +76,14 @@
     height: 210mm;
     margin: 0 !important;
     padding: 0 !important;
+    position: relative !important;
   }
 
-  /* Forcer 3 colonnes avec espace */
+  /* Forcer 3 colonnes avec espace précis */
   .print\:grid-cols-3 {
     display: grid !important;
     grid-template-columns: repeat(3, 90mm) !important;
-    gap: 10mm !important;
-    margin: 0 !important;
+    grid-gap: 8.5mm !important;
     padding: 5mm !important;
     justify-content: center !important;
   }
@@ -81,100 +91,34 @@
   /* Style des étiquettes */
   .price-label {
     width: 90mm !important;
-    height: 40mm !important;
-    padding: 2mm 2mm 1mm 2mm !important;  
+    height: 45mm !important;
+    padding: 3mm !important;  
     margin: 0 !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
+    box-sizing: border-box !important;
+    page-break-inside: avoid !important;
   }
 
   /* Wrapper des étiquettes */
   .label-wrapper {
     width: 90mm !important;
-    height: 40mm !important;
+    height: 45mm !important;
     padding: 0 !important;
     margin: 0 !important;
+    box-sizing: border-box !important;
+    page-break-inside: avoid !important;
   }
 
   /* Ajustements spécifiques pour le contenu des étiquettes */
   .price-label > div {
-    width: 100% !important;
-  }
-
-  .price-label .text-base {
-    font-size: 12pt !important;
-    line-height: 1.1 !important;
-  }
-
-  .price-label .text-xl {
-    font-size: 16pt !important;
-    line-height: 1.1 !important;
-  }
-
-  .price-label .text-2xl {
-    font-size: 18pt !important;
-    line-height: 1.1 !important;
-  }
-
-  .price-label .text-sm {
-    font-size: 10pt !important;
-    line-height: 1.1 !important;
-  }
-
-  .price-label .text-xs {
-    font-size: 9pt !important;
-    line-height: 1.1 !important;
-  }
-
-  /* Forcer l'affichage des couleurs */
-  * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
-  /* Éviter les sauts de page */
-  .print\:break-inside-avoid {
-    break-inside: avoid !important;
     page-break-inside: avoid !important;
-  }
-
-  /* Réinitialiser toutes les marges possibles */
-  .print\:m-0 {
-    margin: 0 !important;
-  }
-  
-  .container {
-    margin: 0 !important;
-    padding: 0 !important;
-    max-width: none !important;
   }
 }
 
-@media print {
-  @page {
-    margin: 0;
-    size: auto;
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
-  /* Cacher les éléments non nécessaires à l'impression */
-  nav, header, footer, .print\:hidden {
-    display: none !important;
-  }
-
-  /* Forcer les dimensions exactes à l'impression */
-  .price-label {
-    width: 90mm !important;
-    height: 40mm !important;
-    margin: 0 !important;
-    padding: 3mm !important;
-    page-break-inside: avoid !important;
-  }
+/* Désactiver les transformations qui pourraient affecter les dimensions */
+* {
+  transform: none !important;
+  zoom: 1 !important;
 }

@@ -1,14 +1,11 @@
 import PropTypes from 'prop-types';
+import { formatPrice } from '../utils/formatters';
 
-export default function ClassicPriceLabel({ product }) {
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('fr-FR').format(price);
-  };
-
+export default function LabelGrosOnly({ product }) {
   return (
     <div className="price-label bg-yellow-300 flex flex-col justify-between border-[1px] border-black pb-12 ">
       {/* Libellé du produit en haut */}
-      <div className={`text-red-600 ${product.labelName.length > 30 ? 'text-[16px]' : 'text-[26px]'} text-center font-bold leading-tight mb-2`}>
+      <div className="text-red-600 text-[16px] text-center font-bold leading-tight mb-2">
         {product.labelName}
       </div>
 
@@ -23,16 +20,7 @@ export default function ClassicPriceLabel({ product }) {
           </div>
         </div>
 
-        <div className=" text-4xl font-thin ">/</div>
-
-        <div className="text-center flex-1">
-          <div className="text-black text-md font-bold ">
-            DETAIL
-          </div>
-          <div className="text-[#cc0000] text-3xl font-bold tabular-nums">
-            {formatPrice(product.priceRetail)}
-          </div>
-        </div>
+       
       </div>
 
       {/* Prix en gros détail */}
@@ -53,14 +41,12 @@ export default function ClassicPriceLabel({ product }) {
    );
 }
 
-ClassicPriceLabel.propTypes = {
+LabelGrosOnly.propTypes = {
   product: PropTypes.shape({
-    labelName: PropTypes.string.isRequired,
-    priceBox: PropTypes.number.isRequired,
-    priceRetail: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    reference: PropTypes.string.isRequired,
     priceWholesale: PropTypes.number.isRequired,
-    alcoholContent: PropTypes.string.isRequired,
-    packaging: PropTypes.number.isRequired,
-    volume: PropTypes.string.isRequired,
-  }).isRequired,
+    wholesaleDetails: PropTypes.string,
+    barcode: PropTypes.string
+  }).isRequired
 };

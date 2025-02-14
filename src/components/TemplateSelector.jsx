@@ -21,8 +21,8 @@ export default function TemplateSelector({ selectedTemplate, onTemplateChange })
           <input
             type="radio"
             name="template"
-            value="modern"
-            checked={selectedTemplate === 'modern'}
+            value="gros"
+            checked={selectedTemplate === 'gros'}
             onChange={(e) => onTemplateChange(e.target.value)}
             className="w-4 h-4 text-primary border-gray-300 focus:ring-primary"
           />
@@ -34,6 +34,6 @@ export default function TemplateSelector({ selectedTemplate, onTemplateChange })
 }
 
 TemplateSelector.propTypes = {
-  selectedTemplate: PropTypes.oneOf(['classic', 'modern']).isRequired,
+  selectedTemplate: PropTypes.oneOf(['classic', 'gros']).isRequired,
   onTemplateChange: PropTypes.func.isRequired,
 };

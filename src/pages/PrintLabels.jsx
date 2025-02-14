@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import ModernPriceLabel from '../components/ModernPriceLabel';
+import LabelGrosOnly from '../components/LabelGrosOnly';
 import ClassicPriceLabel from '../components/ClassicPriceLabel';
 import TemplateSelector from '../components/TemplateSelector';
 import LabelWrapper from '../components/LabelWrapper';
@@ -60,8 +60,8 @@ export default function PrintLabels() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 print:grid-cols-3">
             {selectedProducts.map((product, index) => (
               <LabelWrapper key={`${product.id}-${index}`}>
-                {template === 'modern' ? (
-                  <ModernPriceLabel product={product} />
+                {template === 'gros' ? (
+                  <LabelGrosOnly product={product} />
                 ) : (
                   <ClassicPriceLabel product={product} />
                 )}
